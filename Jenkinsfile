@@ -62,8 +62,7 @@ pipeline {
             steps {
                 script {
                     withKubeConfig([credentialsId: 'k8s-credentials', contextName: 'k8s-cluster']) {
-                        sh "kubectl set image deployment/$IMAGE_NAME $IMAGE_NAME=$REGISTRY/$IMAGE_NAME:${env.BUILD_NUMBER}"
-                        sh "kubectl rollout status deployment/$IMAGE_NAME"
+                        sh "kubectl apply -f k8s/"
                     }
                 }
             }
